@@ -21,7 +21,7 @@
             Europa
         </h1>
         <p class="quote">
-            "There might be octopuses swimming in the depths of Europa, for all we know" - Nishant</p>
+            "There might be octopuses swimming in the depths of Europa, for all we know" - Nishant to Rion</p>
     
         <p>
             Water, some esssential chemicals and a source of energy. That's all life needs, these are the "ingredients" for life. Europa, an icy moon of Jupyter, 
@@ -36,26 +36,49 @@
         </p>
 
         <p>
-            Clearly, the possibility of life makes Europa a very interesting target. Needless to say, that is what we wanted to work on. Afterall, if we find life on
-            Europa, however small and primitive may it be, it will tell us one thing very clearly - if life can happen, it will happen. And our whole universe must be
-            beaming with life. But good data, if any regarding organics in Europa is impossible to find! Hence, we are settling down for another question that comes 
-            to our mind - Why are those scars red, though? 
+            Clearly, the possibility of life makes Europa a very interesting target. Afterall, if we find life on Europa, however small and primitive may it be, 
+            it will tell us one thing very clearly - if life can happen, it will happen. And our whole universe must be beaming with life. 
         </p>
-    
+
+        <br>
+        <hr>
+        <br>
+
+        <h1>
+            Lineas
+        </h1>
+
+        <p>
+            The most interesting geographical feature of Europa are the Lineas (short for Lineaments), the red scars, so to speak. The exact reason for their 
+            formation is unknown but people have maade some guesses. It might be partly due to tidal forces from  Jupyter and partly due to asynchronous rotation
+            of Europa with Jupyter.
+            We aren't yet sure what kind of salts are present there. In this project, we will investigate the Lineas, try to find out what
+            salts are present  in the Lineas and see (and hope) something organic comes up. Hydrated salts have already been detected in Europa and it seems just 
+            like a matter of time before we find organics. 
+        </p>
+
+
         <br>
         <hr>
         <br>
     
         <h1>    
-            Goal 1: identifying all the Lineas
+            Goal 1: Identifying all the Lineas
         </h1>
-    
-        <p>
-            The scars we see are called Lineas, short for Lineaments. Lineas are formed (or are believed to be formed) from the tidal forces pulling apart the ice sheets. Our aim is to first identify the lineas
-            on Europa (from images) by making a Linea detection algorithm. We will then proceed to classify it as one of the 4 types of lineas. We will probably use 
-            a Neural Network for recognizing the Lineas and classify them using k Means with 4 centres (right?).
-        </p>
-    
+
+        <ul>
+            <li>
+                Using Convolutional Neural Networks, we will identify all the Lineas on Europa.
+            </li>
+
+            <br>
+
+            <li>
+                We would furthur like to classify the Lineas. There is already a way to classify the Lineas into 4 classes based on the geographical features. 
+                This would be just a K means problem with 4 centers. Shall time permit, we would also like to classify them as old and new which we can guess by
+                overlaps of the Lineas.
+            </li>
+        </ul>
     
         <br>
         <hr>
@@ -64,10 +87,22 @@
         <h1>    
             Goal 2: What kind of salts are present in the Lineas
         </h1>
-    
+
+        <ul>
+            <li>
+                Using data from Near Infrared Mapping Spectrometer of Galileo and other spectroscopy data of ground and space based telescopes, we would want to find
+                the salts present in the Lineas. 
+            </li>
+
+            <br>
+
+            <li>
+                Check if the concentration or the availability of the salts is higher on the Lineas. 
+            </li>
+        </ul>
+
         <p>
-            Using data from Near Infrared Mapping Spectrometer of Galileo and other spectroscopy data of ground and space based telescopes, we would want to find
-            the salts present in the Lineas. Ummm, not really sure how machine learning could be used for this. 
+            This might be analytical as an ML approach to it goals 2 would take huge memory, unless we find something clever
         </p>
     
     
@@ -81,13 +116,13 @@
         </h1>
         <ul>
             <li>
-                Galileo and HST images of europa for identifying and classifying Lineas from <a href="https://photojournal.jpl.nasa.gov/targetFamily/Jupiter?subselect=Target%3AEuropa%3A">NASA</a>
+                Galileo, HST images and Voyager 2 images of europa for identifying and classifying Lineas from <a href="https://photojournal.jpl.nasa.gov/targetFamily/Jupiter?subselect=Target%3AEuropa%3A">NASA</a>
             </li>
+
+            <br>
+
             <li>
-                Galileo's <a href="https://photojournal.jpl.nasa.gov/targetFamily/Jupiter?subselect=Instrument%3ANear+Infrared+Mapping+Spectrometer%3ATarget%3AEuropa">NIMS data</a> for finding salts on lineas
-            </li>
-            <li>
-                The hunt for more data for goal 2 is on!
+                The hunt for more data for goal 2 is on. We are looking for ground and space based telesccopes' spectroscopy data.
             </li>
         </ul>
     
@@ -103,14 +138,32 @@
             <li>
                 <strong>1998:</strong> Salts on Europa's Surface Detected by Galileo's NIMS, McCord et al
             </li>
+
+            <br>
+
             <li>
                 <strong>1998:</strong> Evolution of Lineaments on Europa: Clues from Galileo Multispectral Imaging Observations, McCord et al
             </li>
+
+            <br>
+
+
             <li>
                 <strong>2011:</strong> Spatially Resolved Spectroscopy of Europa: The Distinct Spectrum of Large-scale Chaos, Geissler et al
             </li>
+
+            <br>
+
+
             <li>
                 <strong>2019:</strong> Sodium chloride on the surface of Europa, Trumbo et al
+            </li>
+
+            <br>
+
+
+            <li>
+                <strong>2021:</strong> A Comprehensive Revisit of Select Galileo/NIMS Observations of Europa, Mishra et al
             </li>
         </ul>
 
@@ -119,24 +172,48 @@
         <br>
 
         <h1>
-            Mentor, Teammates and Work Division:
+            Teammates, Mentors, and Work Division:
         </h1>
 
         <ul>
             <li>
-                Mentor: Prof. Guneshwar Thangjam, Assistant Professor and Chairperson, SEPS
+                <ul>
+                    Teammates
+                    <li>
+                        Nishant Pratim Das, <br>4th year I.M.Sc, School of Physical Sciences
+                    </li>
+
+                    <br>
+
+                    <li>
+                        Rion Glenn Nazareth,<br>4th year I.M.Sc, School of Physical Sciences
+                    </li>
+                </ul>
             </li>
+
+            <br>
+
             <li>
-                Nishant Pratim Das, 4th year I.M.Sc, SPS
-            </li>
-            <li>
-                Rion Glenn Nazareth, 4th year I.M.Sc, SPS
-            </li>
+                <ul>
+                    Mentors
+                    <li>
+                        Prof. Guneshwar Thungjam, <br>Assistant Professor and Chairperson, School of Earth and Planetary Sciences
+                    </li>
+
+                    <br>   
+
+                    <li>
+                        Prof. Subhankar Mishra, <br> Reader-F, School of Computer Sciences
+                    </li>
+                </ul>                  
+            </li>          
         </ul>
 
         <p>
-            Since we don't really know what we have in store, we are not very sure who will do what but most likely, both of us will work on all the subjects
-            and we shall take/need (a lot of) help from our mentor, especially for goal 2.
+            The Neural Networks will be coded by both of us. Rion will look for more spectroscopy data in space based telesccopes while Nishant will for them in 
+            ground based ones. The presentations will be made by Rion and the website will be developed by Nishant. For Classifying the Lineas, Rion shall work 
+            work on classification based on age using DBSCAN while Nishant works on classifying based on geographical features using K Means. We will need (a lot of 
+            help) from our mentor, Guneshwar Sir, especially in the second part.
         </p>
 
             
@@ -150,10 +227,16 @@
     
         <ul>
             <li>
-                Goal 1: Find out the location of all the Lineas on Europa. If time permits, we might classify them as well since that shouldn't be too hard
+                Goal 1: <br> 
+                We will have had a run an image recognition algorithm on Europa to identify all the Lineas. However, we expect some errors since Lineas 
+                overlap over one another. We will have fixed these errors after a few weeks from midway.
             </li>
+
+            <br>
+
             <li>
-                Goal 2: We already have the data from NIMS, Galileo. We hope to collect space and ground based telescopes' spectroscopy data by midway
+                Goal 2: <br>
+                We will have collected the spectroscopy data from various telesccopes
             </li>
         </ul>
     
@@ -166,8 +249,10 @@
             Expectations from the project:
         </h1>
         <p>
-            People have guessed that the red colour is due to magnesium sulphate or sulphuric acid. If that is the case, the spectroscopy data restricted to just 
-            the Lineas should match with spectrum of the these compounds. 
+            People have guessed that the red colour of the Lineaments is due to magnesium sulphate or sulphuric acid. If that is the case, the spectroscopy data
+            restricted to just the Lineas should match with spectrum of the these compounds. But why does it matter? The chemical composition of the Lineas
+            will give us massive hints about the chemical composition of the oceans underneath. The better understanding of the chemical composition of Europa is 
+            very desirable since that will give us hints about the lifeforms (crossed-fingers) and their biological processes 
         </p>
     
         <br>
