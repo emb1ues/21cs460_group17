@@ -7,4 +7,4 @@ In this project, we will try investigate the chemical composition of Lineas usin
 - This website is being maintained as a part of the project in the CS460(ML) course by Nishant Pratim Das and Rion Gleen Nazareth. 
 - It is hosted [here](https://emb1ues.github.io/21cs460_group17/).
 
-![image of europa](https://upload.wikimedia.org/wikipedia/commons/a/a6/Europa_moon.png)
+![image of europa](https://upload.wikimedia.org/wikipedia/commons/a/a6/Europa_moon.png "Europa")
