@@ -43,6 +43,9 @@ h1 {
     font-family: 'Courier New', Courier, monospace;
 }
 
+a {
+    color: white;
+}
 
 p {
     color: whitesmoke;
@@ -70,8 +73,9 @@ li {
     text-align: center;
 } */
 
-a {
+.link {
     background-color: white;
+    color: black;
     display: block;
     /* margin-left: 50%;
     transform: translateX(-50%); */

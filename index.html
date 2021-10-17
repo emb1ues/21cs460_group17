@@ -13,7 +13,7 @@
     <h2 class="heading">
         What kind of salts are present on the Lineas of Europa?
     </h2>
-    <a href="proposal.html">Project Proposal Website</a>
+    <a class = "link" href="proposal.html">Project Proposal Website</a>
     <img src="images/europa.jpg" alt="europa images here">
 
 
@@ -143,7 +143,8 @@
 
         <ul>
             <li>
-                What we are dealing with an image segmentation problem which is a type of computer vision problem in which we try to find each pixel which belong to a particular class
+                What we are dealing with an image segmentation problem which is a type of computer vision problem in which we try to find each pixel which belong to a particular class.
+                (image taken from y/codebasics)
             </li>
         </ul>
     
@@ -164,11 +165,78 @@
                 Two models have been built till now which are based on random forests and the accuracy of both the models is about 80%. Various experiments have been done including 
                 kfold cross validation and transfer learning. The two models have been discussed below. 
             </li>
+            <br>
+            <li>
+                Because of significant Bayesian Error (since zoomed in images of lineas will be labelled differently by different people), there will always be some error. 
+            </li>
         </ul>
 
         
 
     
+        <br>
+        <hr>
+        <br>
+
+     
+
+        <h1>
+            Relevant papers and inferences
+        </h1>
+        <ul>
+            <li>
+                Since, Linea recognition model isn't built yet, we do not have any direct paper upon whose results we can improve or upon whose methods we can 
+                experiment. But there are many references for image segmentation. 
+            </li>
+
+            <br>
+
+            <li>
+                Assessing the Role of Random Forests in Medical Image Segmentation by Dennis Hartmann et al: <br><br>
+                The first model was inspired in part from the paper 'Assessing the Role of Random Forests in Medical Image Segmentation' by Dennis Hartmann et al. In this paper, 
+                two different random forest architectures were explored. The first (and the weaker) one was just passing original images and labels. It was shown that this is not very
+                reliable. Hence, features were extracted and added. It was shown in the paper that with just 4 additional features, the results were excellent (excellence is defined 
+                as the is the accuracy of U-net). We added not 4 but 51 features to our dataframe. Unlike this paper, we do not have gigabytes of data as our disposal. 
+            </li>
+
+            <br>
+
+            <li>
+                A New Convolutional Neural Network With
+                Random Forest Method for Hydrogen
+                Sensor Fault Diagnosis by Yongyi Sun et al: <br> <br>
+                The second model was inspired from the paper 'A New Convolutional Neural Network With
+                Random Forest Method for Hydrogen
+                Sensor Fault Diagnosis' by Yongyi Sun et al. Traditional machine learning methods for fault diagnosis are based on
+                features extracted by experts. Only the convolutional layer from the CNN is borrowed and is passed through the RF classifier
+                Compared to other ML
+                methods, RF has the characteristics of low complexity, fast
+                computing speed, high accuracy rate, insensitive to parameters, no need for feature normalization, less over fitting. Importantly, RF is more robust with respect to
+                noise
+                zero padding reduces overfitting.
+                The filter pixel features captured by the CNN are
+                input into the RF classifier to diagnose the fault mode
+                of a hydrogen sensor.
+                The proposed
+                method is able to fuse the two major blocks of semantic segmentation approaches into a single learning body—
+                feature extraction, feature selection and classification—
+                without requiring expert intervention.
+                In this paper, it was mentioned that CNN layers + RF outperforms CNN alone
+            </li>
+            <br>
+
+            <li>
+                Nonsynchronous Rotation Evidence and Fracture History
+                in the Bright Plains Region, Europa by Simon A. Kattenhorn: <br><br>
+                We are now trying to use arcGIS to create the labels referencing the paper 'Nonsynchronous Rotation Evidence and Fracture History
+                in the Bright Plains Region, Europa' by Simon A. Kattenhorn. 
+            </li>
+            
+            <img class = "list" src="images/linea.png">
+
+        </ul>
+
+             
         <br>
         <hr>
         <br>
@@ -181,6 +249,10 @@
             1. Base Model and results
         </h1>
         <ul>
+            <li>
+                <a href="https://colab.research.google.com/drive/1i-iAwuBsLNSFZTejLtOQd9dyaJ7-4LHU?usp=sharing">colab notebook</a>
+            </li>
+            <br>
             <li>
                 Decision Trees and Random Forests: <br> <br>
                 A decision tree is a ML model which ask we ask some "significant questions" to an object and make some prediction about it. 
@@ -319,6 +391,10 @@
 
         <ul>
             <li>
+                <a href="https://colab.research.google.com/drive/1gzaZ-wsgUIQNRnxuPqrZf9f_tgBe_mqQ?usp=sharing">colab notebook</a>
+            </li>
+            <br>
+            <li>
                 This model stems from ideas similar to the previous one. 
             </li>
 
@@ -331,6 +407,7 @@
                 Convolutional Neural Networks are neural networks which are very good at image recognition and Computer Vision in general. It has two parts,
                 a feature extractor which finds different kernals and extracts various information about the image. The kernal-convolved image is then passed 
                 to a fully connected neural network which is trained to find out the relationships necessary among the kernals to achieve a particular task. 
+                (image taken from y/codebasics)
             </li>
 
             <img class = "list_wide" src="images/cnn.PNG">
@@ -375,7 +452,7 @@
                 </li>
 
                 <br>
-                
+
 
                 <li>
                     2. Feature Extractor hyperparameter: number of features extracted <br><br>
@@ -410,46 +487,7 @@
 
 
         </ul>
-    
-        <br>
-        <hr>
-        <br>
-
-        <h1>
-            Related Works:
-        </h1>
-        <ul>
-            <li>
-                <strong>1998:</strong> Salts on Europa's Surface Detected by Galileo's NIMS, McCord et al
-            </li>
-
-            <br>
-
-            <li>
-                <strong>1998:</strong> Evolution of Lineaments on Europa: Clues from Galileo Multispectral Imaging Observations, McCord et al
-            </li>
-
-            <br>
-
-
-            <li>
-                <strong>2011:</strong> Spatially Resolved Spectroscopy of Europa: The Distinct Spectrum of Large-scale Chaos, Geissler et al
-            </li>
-
-            <br>
-
-
-            <li>
-                <strong>2019:</strong> Sodium chloride on the surface of Europa, Trumbo et al
-            </li>
-
-            <br>
-
-
-            <li>
-                <strong>2021:</strong> A Comprehensive Revisit of Select Galileo/NIMS Observations of Europa, Mishra et al
-            </li>
-        </ul>
+  
 
 
 
@@ -462,8 +500,14 @@
     
 
         <h1>
-            Expectations from the project:
+            To Do and Expectations from the project:
         </h1>
+        <p>
+            We plan on implementing U-net and SVM instead of RF and see the results. Although literature says these won't give better results, we would like to see that ourselves. 
+            We also would like to see the results of clustering algorithms on the results. We have to label more images and label them better, use hyperparameter tuning techniques 
+            and finish goal 1 and proceed to goal 2 which is spectral analysis of the lineas. 
+            
+        </p>
         <p>
             People have guessed that the red colour of the Lineaments is due to magnesium sulphate or sulphuric acid. If that is the case, the spectroscopy data
             restricted to just the Lineas should match with spectrum of the these compounds. But why does it matter? The chemical composition of the Lineas
