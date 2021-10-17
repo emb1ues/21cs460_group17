@@ -13,11 +13,16 @@
     <h2 class="heading">
         What kind of salts are present on the Lineas of Europa?
     </h2>
-
+    <a href="proposal.html">Project Proposal Website</a>
     <img src="images/europa.jpg" alt="europa images here">
 
-    
+
+
+    <h3 class="section">
+        Introduction
+    </h3>
     <div>
+        
         <h1>
             Europa
         </h1>
@@ -59,121 +64,33 @@
         </p>
 
 
+
         <br>
         <hr>
         <br>
     
         <h1>    
-            Goal 1: Identifying all the Lineas
+            Goals
         </h1>
 
         <ul>
             <li>
-                Using Convolutional Neural Networks, we will identify all the Lineas on Europa.
+                Test out different ML techniques (both traditional and deep learning) and find a Linea recognition model with high accuracy
             </li>
 
             <br>
 
             <li>
-                We would furthur like to classify the Lineas. There is already a way to classify the Lineas into 4 classes based on the geographical features. 
-                This would be just a K means problem with 4 centers. Shall time permit, we would also like to classify them as old and new which we can guess by
-                overlaps of the Lineas.
+                Using spectroscopic data, find the salts present in the Lineas.
             </li>
         </ul>
     
-        <br>
-        <hr>
-        <br>
-
-        <h1>    
-            Goal 2: What kind of salts are present in the Lineas
-        </h1>
-
-        <ul>
-            <li>
-                Using data from Near Infrared Mapping Spectrometer of Galileo and other spectroscopy data of ground and space based telescopes, we would want to find
-                the salts present in the Lineas. 
-            </li>
-
-            <br>
-
-            <li>
-                Check if the concentration or the availability of the salts is higher on the Lineas. 
-            </li>
-        </ul>
-
-        <p>
-            This might be analytical as an ML approach to it goals 2 would take huge memory, unless we find something clever
-        </p>
-    
-    
-        <br>
-        <hr>
-        <br>
-
-        
-        <h1>
-            Datasets to be used:
-        </h1>
-        <ul>
-            <li>
-                Galileo, HST images and Voyager 2 images of europa for identifying and classifying Lineas from <a href="https://photojournal.jpl.nasa.gov/targetFamily/Jupiter?subselect=Target%3AEuropa%3A">NASA</a>
-            </li>
-
-            <br>
-
-            <li>
-                The hunt for more data for goal 2 is on. We are looking for ground and space based telesccopes' spectroscopy data.
-            </li>
-        </ul>
-    
-        <br>
-        <hr>
-        <br>
-
-    
-        <h1>
-            Related Papers:
-        </h1>
-        <ul>
-            <li>
-                <strong>1998:</strong> Salts on Europa's Surface Detected by Galileo's NIMS, McCord et al
-            </li>
-
-            <br>
-
-            <li>
-                <strong>1998:</strong> Evolution of Lineaments on Europa: Clues from Galileo Multispectral Imaging Observations, McCord et al
-            </li>
-
-            <br>
-
-
-            <li>
-                <strong>2011:</strong> Spatially Resolved Spectroscopy of Europa: The Distinct Spectrum of Large-scale Chaos, Geissler et al
-            </li>
-
-            <br>
-
-
-            <li>
-                <strong>2019:</strong> Sodium chloride on the surface of Europa, Trumbo et al
-            </li>
-
-            <br>
-
-
-            <li>
-                <strong>2021:</strong> A Comprehensive Revisit of Select Galileo/NIMS Observations of Europa, Mishra et al
-            </li>
-        </ul>
-
         <br>
         <hr>
         <br>
 
         <h1>
-            Teammates, Mentors, and Work Division:
+            Teammates and Mentors
         </h1>
 
         <ul>
@@ -210,39 +127,338 @@
             </li>          
         </ul>
 
-        <p>
-            The Neural Networks will be coded by both of us. Rion will look for more spectroscopy data in space based telesccopes while Nishant will for them in 
-            ground based ones. For Classifying the Lineas, Rion shall work on classification based on age using DBSCAN while Nishant works on classifying based 
-            on geographical features using K Means. We will need (a lot of help) from our mentor, Guneshwar Sir, especially in the second part.
-        </p>
+
+    </div>
+    
+
+
+    <h3 class="section">
+        Midway Updates
+    </h3>
+
+    <div>
+        <h1>    
+            Current Status and Hurdles
+        </h1>
+
+        <ul>
+            <li>
+                What we are dealing with an image segmentation problem which is a type of computer vision problem in which we try to find each pixel which belong to a particular class
+            </li>
+        </ul>
+    
+
+        <img class = "list" src="images/imgseg.png">
+
+        <ul>
+            <li>
+                U-net is one of the very common tools used for such problems. However, U-net is a neural network framework and usually does not perform so well with limited training data.
+            </li>
+            <br>
+            <li>
+                Since linea recognition has not been done before, readily available masks (labelled images) are not available. We have created 4 labels using apeer.com. Since the labels
+                have to be created by hand, this is a very tedious and time consuming process. We are training with Prof. Guneshwar to create labels using arcGIS software.
+            </li>
+            <br>
+            <li>
+                Two models have been built till now which are based on random forests and the accuracy of both the models is about 80%. Various experiments have been done including 
+                kfold cross validation and transfer learning. The two models have been discussed below. 
+            </li>
+        </ul>
+
+        
+
+    
+        <br>
+        <hr>
+        <br>
+        
+        <h1>    
+            Model 1: Image Filters + Random Forest
+        </h1>
+        
+        <h1>
+            1. Base Model and results
+        </h1>
+        <ul>
+            <li>
+                Decision Trees and Random Forests: <br> <br>
+                A decision tree is a ML model which ask we ask some "significant questions" to an object and make some prediction about it. 
+                The model learns what questions to ask and in which order to ask from some training data. They are easy to use, understand and build but 
+                decision trees tend to have a high variance, that is, they can be very sensitive to the training data.  A random forest can be thought of as a stochastic 
+                version of decision trees. A random forest is build using many small decision trees. Each decision trees in a random forest is made using certain
+                features (chosen at random) from certain datapoints 
+                (again, chosen at random). The final result is give by taking a poll in the forest.
+            </li>
+
+            <br>
+
+            <li>
+                Image segmentation can be thought of as a classification problem. Where each pixel is being classified into belonging to or not into a class.
+                In our case the class is lineas. 
+            </li>
+
+            <br>
+
+            <li>
+                In this approach, the original images are convoluted with different kernals to produce different responses. 
+                A dataframe is created with the original images, their responses to different filters and their labels
+            </li>
+        </ul>
+            <img class = "list" src="images/visual.jpg">
+        <ul>
+            
+        
+            <li>
+                32 gabor filters, the canny edge filter, the robert's edge filter, prewitt's, sobel, 4 gaussian, 4 median and 4 variance filters were used to create the responses.
+                The dataframe has 51 columns in total including the labels. Each image is resized into 500x500 images and 4 images were used for training. 
+                This gives us <b>1 million pixels for training and validation, each with 50 features and 1 label. </b> 
+            </li>
+
+            <br>
+
+            <li>
+                A random forest classifier was trained using 80% of this data for training. The train accuracy was found to be 81% whereas the test accuracy was found to be 78%. 
+                This shows a high bias but a low variance in our model. 
+            </li>
+
+            
+        </ul>
+
+        <img class = "list" src="images/rfbase.PNG">
+        <ul>
+
+            <li>
+                An image was taken which the model had never encountered before. 
+            </li>
+        </ul>
+
+            <img class = "list" src="images/predim.PNG">
+
+        <ul>
+            <li>
+                The lineas were predicted by the model as follows: 
+            </li>
+        </ul>
+        
+    
+        <img class = "list" src="images/predicted.PNG">
+
+
+
+        <h1>
+            2. Experiments and hyperparameter tuning
+        </h1>
+
+        <ul>
+            <li>
+                Scaling: <br> <br>
+                All the columns were normalised to [0,1] however, no change was observed in the accuracy from this
+            </li>
+            <br>
+            <li>
+                RF hyperparameter: number of estimators <br> <br>
+                Increasing the estimators increases the accuracy of the model. However, the training time increases drastically.
+            </li>
+            <br>
+            <li>
+                RF hyperparameter: minimum number of samples needed below which splitting won't be done <br> <br>
+                The default value of this parameter is 2. In that case the model overfits the training data and training accuracy goes upto 99.9%. However, the testing accuracy only 
+                remains at a low 80%. This is a case of low bias but high variance. As min_samples_split is increase, the testing accuracy does not change but the training accuracy 
+                decrease. Finally the value was kept at a number where both the accuracies are about 80%. This is a case of high bias, but low variance. 
+            </li>
+            <br>
+            <li>
+                Dimension Reduction: <br> <br>
+                Using N (=5) random samples from the whole data, random forests were trained on each of the sample. The feature importances were ranked for each of the N models.
+                A net ranking list was created and F (=15) top features were selected. All other features were dropped from the original dataframe. A random forest was created 
+                on this new dataframe and the training and testing accuracies were about the same. Hence, this was found to be an effective method to save computation. 
+            </li>
+
+        </ul>
+        <img class = "list_wide" src="images/dr.PNG">
+        <ul>
+
+            
+
+            <br>
+            <li>
+                20 fold cross validation: <br> <br>
+                The training and testing accuracies were found using a 20 fold cross validation on the reduced-dimension-dataframe. All 20 times, both the accuracies were about 80%. 
+                From this, we can say with more conviction that our model's accuracy is 80%. 
+            </li>
+
+        </ul>
+            <img class = "list_narrow" src="images/kf.PNG">
+        <ul>
+            
+
+            <li>
+                An interesting accuracy vs training size plot: <br> <br>
+                It might be this way because with less number of training points, it is very easy to overfit the training data but that isn't possible when more and more points are added
+                to the training set. This reduces the overfitting of the RF and generalises it. But the testing accuracy is eerily constant.
+
+            </li>
+        </ul>
+        <img class = "list" src="images/plot.PNG">
+
+
+
+    
+        <br>
+        <hr>
+        <br>
+
+        <h1>    
+            Model 2: Convolutional Filters + Random Forest
+        </h1>
+        
+        <h1>
+            1. Base Model and results
+        </h1>
+
+        <ul>
+            <li>
+                This model stems from ideas similar to the previous one. 
+            </li>
+
+            <li>
+                Kernals are matrices which are convolved with an image to extract specific features from an image as shown in the image below. 
+            </li>
+            <img class = "list_wide" src="images/kernals.PNG">
+
+            <li> 
+                Convolutional Neural Networks are neural networks which are very good at image recognition and Computer Vision in general. It has two parts,
+                a feature extractor which finds different kernals and extracts various information about the image. The kernal-convolved image is then passed 
+                to a fully connected neural network which is trained to find out the relationships necessary among the kernals to achieve a particular task. 
+            </li>
+
+            <img class = "list_wide" src="images/cnn.PNG">
+
+            <li>
+                However, in this approach, the 2nd half of the CNN is dropped and a random forest in inserted in it's stead. 
+            </li>
+
+            <li>
+                A CNN (feature extractor, rather) was created which extracts 8 features from the image. 
+            </li>
+            <img class = "list_wide" src="images/fe.PNG">
+
+            <li>
+                A dataframe was created with the original image, the features and the masks and a random forest classifier was trained using this dataframe.
+            </li>
+
+            <br>
+
+            <li>
+                The training and testing accuracy for this model was found to be 80% and 78% respectively. An unseen image was passed to the model and the 
+                prediction was as follows:
+            </li>
+
+            <img class = "list_wide" src="images/cnnpred.PNG">
+
+            <h1>
+                2. Experiments and hyperparameter tuning
+            </h1>
+
+            <ul>
+                <li>
+                    1. Scaling <br><br>
+                    Like the previous model, not much change was observed upon scaling the images down to [0,1] 
+                </li>
+
+                <br>
+
+                <li>
+                    2. removing the batch normalisation
+                    The batch normalisation layer was removed and this again, did not change the accuracy
+                </li>
+
+                <br>
+                
+
+                <li>
+                    2. Feature Extractor hyperparameter: number of features extracted <br><br>
+                    Instead of 8, 16 features were extracted and this did not improved the training accuracy a little but not the testing accuracy.
+                </li>
+                <br>
+
+                <img class = "list" src="images/tl.png">
+
+                <li>
+                    3. Transfer Learning <br><br>
+                    Deep learning can be imagined as starting at a random point in a curve (ideally something like parabola) and taking smart steps
+                    to reach the minima of the curve.
+                    Transfer Learning is guessing a 'smart initial guess' using pretrained data (global minimas of a problem similar to the one you are dealing with).
+                    <br><br>
+                    Weights were borrowed from the VGG16 framework (a framework is pre-defined neural work) trained on imagenet. 
+                    Only the first two layers were used. 
+                </li>
+
+                <img class = "list" src="images/tlvcg.PNG">
+
+                <li>
+                    4. Results from Transfer Learning <br><br>
+                    A random forest classifier was trained upon this and the test and train accuracies were both 79%. We are getting about the same accuracy with the 
+                    borrowed weights as with the trained weights but we save time doing this since the network doesn't have to find the weights. An unseen image
+                    was passed to this transfer-learned model and the predicted image is shown below.
+                </li>
+                
+                <img class = "list" src="images/tlpred.PNG">
+
+            </ul>
+
+
+        </ul>
+    
+        <br>
+        <hr>
+        <br>
+
+        <h1>
+            Related Works:
+        </h1>
+        <ul>
+            <li>
+                <strong>1998:</strong> Salts on Europa's Surface Detected by Galileo's NIMS, McCord et al
+            </li>
+
+            <br>
+
+            <li>
+                <strong>1998:</strong> Evolution of Lineaments on Europa: Clues from Galileo Multispectral Imaging Observations, McCord et al
+            </li>
+
+            <br>
+
+
+            <li>
+                <strong>2011:</strong> Spatially Resolved Spectroscopy of Europa: The Distinct Spectrum of Large-scale Chaos, Geissler et al
+            </li>
+
+            <br>
+
+
+            <li>
+                <strong>2019:</strong> Sodium chloride on the surface of Europa, Trumbo et al
+            </li>
+
+            <br>
+
+
+            <li>
+                <strong>2021:</strong> A Comprehensive Revisit of Select Galileo/NIMS Observations of Europa, Mishra et al
+            </li>
+        </ul>
+
+
+
 
             
         <br>
         <hr>
         <br>
 
-        <h1>    
-            What to expect by midway:
-        </h1>
-    
-        <ul>
-            <li>
-                Goal 1: <br> 
-                We will have had a run an image recognition algorithm on Europa to identify all the Lineas. However, we expect some errors since Lineas 
-                overlap over one another. We will have fixed these errors after a few weeks from midway.
-            </li>
-
-            <br>
-
-            <li>
-                Goal 2: <br>
-                We will have collected the spectroscopy data from various telesccopes
-            </li>
-        </ul>
-    
-        <br>
-        <hr>
-        <br>
     
 
         <h1>
