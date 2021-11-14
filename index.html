@@ -14,6 +14,7 @@
         What kind of salts are present on the Lineas of Europa?
     </h2>
     <a class = "link" href="proposal.html">Project Proposal Website</a>
+    <a class = "link" href="theory.html">Theory</a>
     <img src="images/europa.jpg" alt="europa images here">
 
 
@@ -24,7 +25,7 @@
     <div>
         
         <h1>
-            Europa
+            Europa's Lineas
         </h1>
         <p class="quote">
             "There might be octopuses swimming in the depths of Europa, for all we know" - Nishant to Rion</p>
@@ -45,14 +46,6 @@
             Clearly, the possibility of life makes Europa a very interesting target. Afterall, if we find life on Europa, however small and primitive may it be, 
             it will tell us one thing very clearly - if life can happen, it will happen. And our whole universe must be beaming with life. 
         </p>
-
-        <br>
-        <hr>
-        <br>
-
-        <h1>
-            Lineas
-        </h1>
 
         <p>
             The most interesting geographical feature of Europa are the Lineas (short for Lineaments), the red scars, so to speak. The exact reason for their 
@@ -75,7 +68,7 @@
 
         <ul>
             <li>
-                Test out different ML techniques (both traditional and deep learning) and find a Linea recognition model with high accuracy
+                Test out different ML techniques (both traditional and deep learning) and find a Linea recognition model with high accuracy.
             </li>
 
             <br>
@@ -130,389 +123,171 @@
 
     </div>
     
+    <h3 class="section">
+        The Dataset
+    </h3>
+
+
+    <div>
+
+
+        <h1>    
+            1. Creating the Dataset
+        </h1>
+    
+        <img class = "list" src="images/masks.png">
+
+        <p>
+            The images were collected from Galileo's Solid State Imaging instrument which have been made public by NASA through PDS-atlas. 
+            Seven 800x800 images have been marked by hand using arivis. Two such images are shown above. 
+        </p>
+        
+        <br>
+        <hr>
+        <br>
+
+        <h1>    
+            2: Data Augmention and Imbalance Handling
+        </h1>            
+            <p>
+                Since CNNs rely on augmentation of the data to make the feature extractor invariant of orientation and position of the object in an object,
+                the dataset was augmented using rotations (upto 90 degree), horizontal and vertical flips, zooming and stretching along different directions.
+            </p>
+
+            <p>
+                In our case, the minority class (Lineas) are too less in numbers. Because of this, even if the model predicts almost all the pixels to be majority 
+                class, the accuracy is very high. The way to tackle this problem is to undersample the majority class and/or oversample the minority class.
+                Our dataset first RUSed (random deletion of majority class points) and then SMOTEd (synthetic generation of minority class datapoints).
+                This improves the IoU significantly. 
+            </p>
+    
+
+    </div>
 
 
     <h3 class="section">
-        Midway Updates
+        Models
     </h3>
 
     <div>
-        <h1>    
-            Current Status and Hurdles
-        </h1>
-
-        <ul>
-            <li>
-                What we are dealing with an image segmentation problem which is a type of computer vision problem in which we try to find each pixel which belong to a particular class.
-                (image taken from y/codebasics)
-            </li>
-        </ul>
-    
-
-        <img class = "list" src="images/imgseg.png">
-
-        <ul>
-            <li>
-                U-net is one of the very common tools used for such problems. However, U-net is a neural network framework and usually does not perform so well with limited training data.
-            </li>
-            <br>
-            <li>
-                Since linea recognition has not been done before, readily available masks (labelled images) are not available. We have created 4 labels using apeer.com. Since the labels
-                have to be created by hand, this is a very tedious and time consuming process. We are training with Prof. Guneshwar to create labels using arcGIS software.
-            </li>
-            <br>
-            <li>
-                Two models have been built till now which are based on random forests and the accuracy of both the models is about 80%. Various experiments have been done including 
-                kfold cross validation and transfer learning. The two models have been discussed below. 
-            </li>
-            <br>
-            <li>
-                Because of significant Bayesian Error (since zoomed in images of lineas will be labelled differently by different people), there will always be some error. 
-            </li>
-        </ul>
-
         
-
-    
-        <br>
-        <hr>
-        <br>
-
+        <h1>    
+            1: Image Filters -> Random Forest
+        </h1>
      
-
-        <h1>
-            Relevant papers and inferences
-        </h1>
-        <ul>
-            <li>
-                Since, Linea recognition model isn't built yet, we do not have any direct paper upon whose results we can improve or upon whose methods we can 
-                experiment. But there are many references for image segmentation. 
-            </li>
-
-            <br>
-
-            <li>
-                Assessing the Role of Random Forests in Medical Image Segmentation by Dennis Hartmann et al: <br><br>
-                The first model was inspired in part from the paper 'Assessing the Role of Random Forests in Medical Image Segmentation' by Dennis Hartmann et al. In this paper, 
-                two different random forest architectures were explored. The first (and the weaker) one was just passing original images and labels. It was shown that this is not very
-                reliable. Hence, features were extracted and added. It was shown in the paper that with just 4 additional features, the results were excellent (excellence is defined 
-                as the is the accuracy of U-net). We added not 4 but 51 features to our dataframe. Unlike this paper, we do not have gigabytes of data as our disposal. 
-            </li>
-
-            <br>
-
-            <li>
-                A New Convolutional Neural Network With
-                Random Forest Method for Hydrogen
-                Sensor Fault Diagnosis by Yongyi Sun et al: <br> <br>
-                The second model was inspired from the paper 'A New Convolutional Neural Network With
-                Random Forest Method for Hydrogen
-                Sensor Fault Diagnosis' by Yongyi Sun et al. Traditional machine learning methods for fault diagnosis are based on
-                features extracted by experts. Only the convolutional layer from the CNN is borrowed and is passed through the RF classifier
-                Compared to other ML
-                methods, RF has the characteristics of low complexity, fast
-                computing speed, high accuracy rate, insensitive to parameters, no need for feature normalization, less over fitting. Importantly, RF is more robust with respect to
-                noise
-                zero padding reduces overfitting.
-                The filter pixel features captured by the CNN are
-                input into the RF classifier to diagnose the fault mode
-                of a hydrogen sensor.
-                The proposed
-                method is able to fuse the two major blocks of semantic segmentation approaches into a single learning body—
-                feature extraction, feature selection and classification—
-                without requiring expert intervention.
-                In this paper, it was mentioned that CNN layers + RF outperforms CNN alone
-            </li>
-            <br>
-
-            <li>
-                Nonsynchronous Rotation Evidence and Fracture History
-                in the Bright Plains Region, Europa by Simon A. Kattenhorn: <br><br>
-                We are now trying to use arcGIS to create the labels referencing the paper 'Nonsynchronous Rotation Evidence and Fracture History
-                in the Bright Plains Region, Europa' by Simon A. Kattenhorn. 
-            </li>
+            <img class = "list" src="images/imrf.PNG">
             
-            <img class = "list" src="images/linea.png">
-
-        </ul>
-
-             
-        <br>
-        <hr>
-        <br>
-        
-        <h1>    
-            Model 1: Image Filters + Random Forest
-        </h1>
-        
-        <h1>
-            1. Base Model and results
-        </h1>
-        <ul>
-            <li>
-                <a href="https://colab.research.google.com/drive/1i-iAwuBsLNSFZTejLtOQd9dyaJ7-4LHU?usp=sharing">colab notebook</a>
-            </li>
-            <br>
-            <li>
-                Decision Trees and Random Forests: <br> <br>
-                A decision tree is a ML model which ask we ask some "significant questions" to an object and make some prediction about it. 
-                The model learns what questions to ask and in which order to ask from some training data. They are easy to use, understand and build but 
-                decision trees tend to have a high variance, that is, they can be very sensitive to the training data.  A random forest can be thought of as a stochastic 
-                version of decision trees. A random forest is build using many small decision trees. Each decision trees in a random forest is made using certain
-                features (chosen at random) from certain datapoints 
-                (again, chosen at random). The final result is give by taking a poll in the forest.
-            </li>
-
-            <br>
-
-            <li>
-                Image segmentation can be thought of as a classification problem. Where each pixel is being classified into belonging to or not into a class.
-                In our case the class is lineas. 
-            </li>
-
-            <br>
-
-            <li>
-                In this approach, the original images are convoluted with different kernals to produce different responses. 
-                A dataframe is created with the original images, their responses to different filters and their labels
-            </li>
-        </ul>
-            <img class = "list" src="images/visual.jpg">
-        <ul>
-            
-        
-            <li>
-                32 gabor filters, the canny edge filter, the robert's edge filter, prewitt's, sobel, 4 gaussian, 4 median and 4 variance filters were used to create the responses.
-                The dataframe has 51 columns in total including the labels. Each image is resized into 500x500 images and 4 images were used for training. 
-                This gives us <b>1 million pixels for training and validation, each with 50 features and 1 label. </b> 
-            </li>
-
-            <br>
-
-            <li>
-                A random forest classifier was trained using 80% of this data for training. The train accuracy was found to be 81% whereas the test accuracy was found to be 78%. 
-                This shows a high bias but a low variance in our model. 
-            </li>
-
-            
-        </ul>
-
-        <img class = "list" src="images/rfbase.PNG">
-        <ul>
-
-            <li>
-                An image was taken which the model had never encountered before. 
-            </li>
-        </ul>
-
-            <img class = "list" src="images/predim.PNG">
-
-        <ul>
-            <li>
-                The lineas were predicted by the model as follows: 
-            </li>
-        </ul>
-        
-    
-        <img class = "list" src="images/predicted.PNG">
-
-
-
-        <h1>
-            2. Experiments and hyperparameter tuning
-        </h1>
-
-        <ul>
-            <li>
-                Scaling: <br> <br>
-                All the columns were normalised to [0,1] however, no change was observed in the accuracy from this
-            </li>
-            <br>
-            <li>
-                RF hyperparameter: number of estimators <br> <br>
-                Increasing the estimators increases the accuracy of the model. However, the training time increases drastically.
-            </li>
-            <br>
-            <li>
-                RF hyperparameter: minimum number of samples needed below which splitting won't be done <br> <br>
-                The default value of this parameter is 2. In that case the model overfits the training data and training accuracy goes upto 99.9%. However, the testing accuracy only 
-                remains at a low 80%. This is a case of low bias but high variance. As min_samples_split is increase, the testing accuracy does not change but the training accuracy 
-                decrease. Finally the value was kept at a number where both the accuracies are about 80%. This is a case of high bias, but low variance. 
-            </li>
-            <br>
-            <li>
-                Dimension Reduction: <br> <br>
-                Using N (=5) random samples from the whole data, random forests were trained on each of the sample. The feature importances were ranked for each of the N models.
-                A net ranking list was created and F (=15) top features were selected. All other features were dropped from the original dataframe. A random forest was created 
-                on this new dataframe and the training and testing accuracies were about the same. Hence, this was found to be an effective method to save computation. 
-            </li>
-
-        </ul>
-        <img class = "list_wide" src="images/dr.PNG">
-        <ul>
-
-            
-
-            <br>
-            <li>
-                20 fold cross validation: <br> <br>
-                The training and testing accuracies were found using a 20 fold cross validation on the reduced-dimension-dataframe. All 20 times, both the accuracies were about 80%. 
-                From this, we can say with more conviction that our model's accuracy is 80%. 
-            </li>
-
-        </ul>
-            <img class = "list_narrow" src="images/kf.PNG">
-        <ul>
-            
-
-            <li>
-                An interesting accuracy vs training size plot: <br> <br>
-                It might be this way because with less number of training points, it is very easy to overfit the training data but that isn't possible when more and more points are added
-                to the training set. This reduces the overfitting of the RF and generalises it. But the testing accuracy is eerily constant.
-
-            </li>
-        </ul>
-        <img class = "list" src="images/plot.PNG">
-
-
-
+            <p>
+                Features are extracted through traditional image filters and passed to a Random Forest. 
+                Dimensions are reduced for improving speed and decreasing expense. 
+                Since there are many hyperparameters, like the SMOTE and RUS ratios (dataset handling), min_samples_split (RF) and n_estimators(RF),
+                we believe tuning these hyperparameters might significantly improve the results, but GridSearchCV is too expensive for us. 
+            </p>
     
         <br>
         <hr>
         <br>
 
         <h1>    
-            Model 2: Convolutional Filters + Random Forest
+            2: CNN-Random Forest Hybrid
         </h1>
-        
-        <h1>
-            1. Base Model and results
-        </h1>
-
-        <ul>
-            <li>
-                <a href="https://colab.research.google.com/drive/1gzaZ-wsgUIQNRnxuPqrZf9f_tgBe_mqQ?usp=sharing">colab notebook</a>
-            </li>
-            <br>
-            <li>
-                This model stems from ideas similar to the previous one. 
-            </li>
-
-            <li>
-                Kernals are matrices which are convolved with an image to extract specific features from an image as shown in the image below. 
-            </li>
-            <img class = "list_wide" src="images/kernals.PNG">
-
-            <li> 
-                Convolutional Neural Networks are neural networks which are very good at image recognition and Computer Vision in general. It has two parts,
-                a feature extractor which finds different kernals and extracts various information about the image. The kernal-convolved image is then passed 
-                to a fully connected neural network which is trained to find out the relationships necessary among the kernals to achieve a particular task. 
-                (image taken from y/codebasics)
-            </li>
-
-            <img class = "list_wide" src="images/cnn.PNG">
-
-            <li>
-                However, in this approach, the 2nd half of the CNN is dropped and a random forest in inserted in it's stead. 
-            </li>
-
-            <li>
-                A CNN (feature extractor, rather) was created which extracts 8 features from the image. 
-            </li>
-            <img class = "list_wide" src="images/fe.PNG">
-
-            <li>
-                A dataframe was created with the original image, the features and the masks and a random forest classifier was trained using this dataframe.
-            </li>
-
-            <br>
-
-            <li>
-                The training and testing accuracy for this model was found to be 80% and 78% respectively. An unseen image was passed to the model and the 
-                prediction was as follows:
-            </li>
-
-            <img class = "list_wide" src="images/cnnpred.PNG">
-
-            <h1>
-                2. Experiments and hyperparameter tuning
-            </h1>
-
-            <ul>
-                <li>
-                    1. Scaling <br><br>
-                    Like the previous model, not much change was observed upon scaling the images down to [0,1] 
-                </li>
-
-                <br>
-
-                <li>
-                    2. removing the batch normalisation
-                    The batch normalisation layer was removed and this again, did not change the accuracy
-                </li>
-
-                <br>
-
-
-                <li>
-                    2. Feature Extractor hyperparameter: number of features extracted <br><br>
-                    Instead of 8, 16 features were extracted and this did not improved the training accuracy a little but not the testing accuracy.
-                </li>
-                <br>
-
-                <img class = "list" src="images/tl.png">
-
-                <li>
-                    3. Transfer Learning <br><br>
-                    Deep learning can be imagined as starting at a random point in a curve (ideally something like parabola) and taking smart steps
-                    to reach the minima of the curve.
-                    Transfer Learning is guessing a 'smart initial guess' using pretrained data (global minimas of a problem similar to the one you are dealing with).
-                    <br><br>
-                    Weights were borrowed from the VGG16 framework (a framework is pre-defined neural work) trained on imagenet. 
-                    Only the first two layers were used. 
-                </li>
-
-                <img class = "list" src="images/tlvcg.PNG">
-
-                <li>
-                    4. Results from Transfer Learning <br><br>
-                    A random forest classifier was trained upon this and the test and train accuracies were both 79%. We are getting about the same accuracy with the 
-                    borrowed weights as with the trained weights but we save time doing this since the network doesn't have to find the weights. An unseen image
-                    was passed to this transfer-learned model and the predicted image is shown below.
-                </li>
-                
-                <img class = "list" src="images/tlpred.PNG">
-
-            </ul>
-
-
-        </ul>
-  
-
-
-
-
+     
+            <img class = "list" src="images/cnnrf.PNG">
             
+            <p>
+                In this model, A CNN is trained (with a fully connected dense layer in the end) with an augmented dataset, the metric is set as jaccard. 
+                The feature extractor of the CNN is used to extract features from the images and these are passed to a Random Forest to classify each pixel.
+                Instead of building a CNN and training it to get a feature extractor, one can also get pretrained feature extractors 
+                which are basically image segmentaion CNN frameworks trained on standard datasets. 
+            </p>
+    
         <br>
         <hr>
         <br>
 
-    
-
-        <h1>
-            To Do and Expectations from the project:
+        <h1>    
+            3: U-NET
         </h1>
+     
+            <img class = "list" src="images/unet.PNG">
+            
+            <p>
+                One of the standard image segmentaion, state-of-the-art model. In this model, a contracting CNN path (encoder) is built through convolutional and max pooling layers.
+                These are skip connected to an expanding path (decoder) made through convolutional and upsampling layers. The metric that has been aimed for is the jaccard. 
+            </p>
+    
+    </div>
+
+    <h3 class="section">
+        Attempts to Improve Results
+    </h3>
+
+
+    <div>
+
+
+        <h1>    
+            1. Anomaly Detection (executed)
+        </h1>
+
+        <img class = "list" src="images/anomaly.PNG">
+
         <p>
-            We plan on implementing U-net and SVM instead of RF and see the results. Although literature says these won't give better results, we would like to see that ourselves. 
-            We also would like to see the results of clustering algorithms on the results. We have to label more images and label them better, use hyperparameter tuning techniques 
-            and finish goal 1 and proceed to goal 2 which is spectral analysis of the lineas. 
-            
+            Since Lineas are connected structures, isolated points marked as Lineas are likely to be outliers. To exploit this fact, DBSCAN was run on the set of 
+            points predicted to be on the lineas with n (min samples for a cluster) = 2 and epsilon (distance below which point will be in the same cluster) = 1 
+            and the euclidean metric and dropped all the outliers. Since such points were few, nothing significant came out of this attempt. However,
+            this does increase the precision (and hence the f1 score)
         </p>
+        
+        <br>
+        <hr>
+        <br>
+
+        <h1>    
+            2: Active learning (under execution)
+        </h1>     
+        
+        <img class = "list_wide" src="images/active.PNG">
+
+        <p>
+            In this approach, because of the high cost of labelling the pixels, active learning is used to start the model early even when it has low accuracies. 
+        </p>
+
+        <br>
+        <hr>
+        <br>
+    
+        <h1>    
+            3: Novel Ideas (?)
+        </h1>     
+
+        <p>
+            Anomaly detection to update confidence in each DT in the RF. 
+            Maybe active learning for CNN-RF hybrid is novel. It not not with UNET. 
+            weighted augmentation: Besides these 7 masks, we have additional 4 rougher masks. And among these seven masks, 2 are more accurate than the other 5. 
+            An weighted augmentation can be done to take more samples from the more accurate masks and less samples from the rougher masks.
+        </p>
+    
+
+    </div>
+
+    <h3 class="section">
+        Concluding Remarks
+    </h3>
+
+
+    <div>
+
+
+        <h1>    
+            The Bigger Goal
+        </h1>
+    
         <p>
             People have guessed that the red colour of the Lineaments is due to magnesium sulphate or sulphuric acid. If that is the case, the spectroscopy data
             restricted to just the Lineas should match with spectrum of the these compounds. But why does it matter? The chemical composition of the Lineas
             will give us massive hints about the chemical composition of the oceans underneath. The better understanding of the chemical composition of Europa is 
-            very desirable since that will give us hints about the lifeforms (crossed-fingers) and their biological processes 
+            very desirable since that will give us hints about the lifeforms (crossed-fingers) and their biological processes.
         </p>
     
         <br>
