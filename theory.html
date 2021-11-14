@@ -95,6 +95,33 @@
             SMOTE is a better way to oversample data where one creates synthetic datapoints near the locality of minority datapoints. It achives this by finding the k nearest 
             neighbours of each point and creating random points in between the lines joining the nearest neighbours.        
         </p>
+        <br>
+        <hr>
+        <br>
+
+        <h1>
+            Metrics for Image Segmentation
+        </h1>
+
+       <ol>
+           <li class="bullets">
+               Pixel Accuracy: <br> <br> This is the metric everyone is familiar with. It gives a score of 1 for each pixel correctly classified (Lineas or Background) and 0 for misclassifications.
+               The accuracy is obtained by dividing this sum by the total number of pixels. It can be shown that if the class to be predicted is a minority, pixel accuracy is high 
+               irrespective of true positives. So even if no Linea pixel is being classified correctly, pixel accuracy will still be high.
+           </li>
+           <br>
+           <li class="bullets">
+               The Dice Coeffienct: <br> <br> It is defined as twice the intersection of the predicted image and the mask divided by the sum of the pixels in mask and predicted mask.
+               It can be shown that this is exactly equal to the f1 score. The idea is to reward True Positives. 
+           </li>
+           <br>
+           <li class="bullets">
+               Intersection over Union: <br> <br> It is defined as the intersection of the predicted image and the mask divided by the unionof the predicted image and the mask.
+                The idea is to reward True Postiives, but punish both false positives and false negatives. It can be shown that jaccard (IoU) is a monotonic function of dice coef.
+                In general, dice is about 10% higher than jaccard. 
+            </li>
+           
+       </ol>
 
     </div>
 

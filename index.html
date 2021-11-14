@@ -212,7 +212,7 @@
             3: U-NET
         </h1>
      
-            <img class = "list" src="images/unet.PNG">
+            <img class = "list_wide" src="images/unet.PNG">
             
             <p>
                 One of the standard image segmentaion, state-of-the-art model. In this model, a contracting CNN path (encoder) is built through convolutional and max pooling layers.
@@ -497,6 +497,8 @@
 
         <p>
             The parameters for CNN-RF are the SMOTE and RUS ratios and the number of layers in the Feature Extractor (FE). The parameters t for U-NET is the threshold set of it's result. 
+            Although pixel accuracy is good for our models, it's not a trustworthy metric, especially when there is an imbalance in the dataset (as discussed in the theory page)
+            An IoU of over 50% is considered good (accordin to an article by medium.com), hence our models still have miles to go before can be deployed. 
         </p>
 
                 
