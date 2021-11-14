@@ -13,9 +13,9 @@
     <h2 class="heading">
         What kind of salts are present on the Lineas of Europa?
     </h2>
-    <a class = "link" href="proposal.html">Project Proposal Website</a>
-    <a class = "link" href="theory.html">Theory</a>
-    <img src="images/europa.jpg" alt="europa images here">
+    <a class = "link_left" href="proposal.html">Proposal</a>
+    <a class = "link_right" href="theory.html">Theory</a>
+    <img class = "rotateimg180" src="images/europa.jpg" alt="europa images here">
 
 
 
@@ -139,7 +139,9 @@
 
         <p>
             The images were collected from Galileo's Solid State Imaging instrument which have been made public by NASA through PDS-atlas. 
-            Seven 800x800 images have been marked by hand using arivis. Two such images are shown above. 
+            Seven 800x800 images have been marked by hand using arivis. Two such images are shown above. Since the edges of the lineas 
+            are not very clear, this gives rise to a Bayesian error. Some of the ridges besides the Lineas cast shadows which are hard to
+            differentiate from the Lineas themselves. This gives even more Bayesian error. 
         </p>
         
         <br>
@@ -150,15 +152,16 @@
             2: Data Augmention and Imbalance Handling
         </h1>            
             <p>
-                Since CNNs rely on augmentation of the data to make the feature extractor invariant of orientation and position of the object in an object,
+                Since CNNs rely on augmentation of the data to make the feature extractor invariant of orientation and position of the object in an image,
                 the dataset was augmented using rotations (upto 90 degree), horizontal and vertical flips, zooming and stretching along different directions.
+                This was done through keras.
             </p>
 
             <p>
-                In our case, the minority class (Lineas) are too less in numbers. Because of this, even if the model predicts almost all the pixels to be majority 
-                class, the accuracy is very high. The way to tackle this problem is to undersample the majority class and/or oversample the minority class.
+                In our case, the minority class (Lineas) are too less in number. Because of this, even if the model predicts almost all the pixels to be in the majority 
+                class, the accuracy it gets is very high. The way to tackle this problem is to undersample the majority class and/or oversample the minority class.
                 Our dataset first RUSed (random deletion of majority class points) and then SMOTEd (synthetic generation of minority class datapoints).
-                This improves the IoU significantly. 
+                This improves the IoU significantly. These techniques have been explained in some detail in the theory section.
             </p>
     
 
@@ -214,10 +217,304 @@
             <p>
                 One of the standard image segmentaion, state-of-the-art model. In this model, a contracting CNN path (encoder) is built through convolutional and max pooling layers.
                 These are skip connected to an expanding path (decoder) made through convolutional and upsampling layers. The metric that has been aimed for is the jaccard. 
+                The results of the UNET for binary classification are the probabilistic; to get an actual mask, one has to set a threshold on the prediction of the UNET.
+                This was found through a BGD algorithm.
             </p>
     
     </div>
 
+    <h3 class="section">
+        Results
+    </h3>
+
+    
+    <div>
+
+
+        <h1>    
+            1. The Scores
+        </h1>
+    
+        <table class="tg">
+            <thead>
+              <tr>
+                <th class="tg-3ib7" colspan="3" rowspan="2">Model <br>&nbsp;&nbsp;</th>
+                <th class="tg-3ib7" rowspan="2">Params</th>
+                <th class="tg-3ib7"></th>
+                <th class="tg-3ib7" colspan="2">mIoU</th>
+                <th class="tg-3ib7"></th>
+                <th class="tg-3ib7" colspan="2">IoU</th>
+                <th class="tg-3ib7"></th>
+                <th class="tg-3ib7" colspan="2">Pixel Accuracy</th>
+                <th class="tg-3ib7"></th>
+                <th class="tg-3ib7" colspan="2">Dice (f1)</th>
+                <th class="tg-3ib7"></th>
+              </tr>
+              <tr>
+                <th class="tg-3sk4"></th>
+                <th class="tg-aos0">test%</th>
+                <th class="tg-aos0">train%</th>
+                <th class="tg-aos0"></th>
+                <th class="tg-aos0">test%</th>
+                <th class="tg-aos0">train%</th>
+                <th class="tg-aos0"></th>
+                <th class="tg-aos0">test%</th>
+                <th class="tg-aos0">train%</th>
+                <th class="tg-aos0"></th>
+                <th class="tg-aos0">test%</th>
+                <th class="tg-aos0">train%</th>
+                <th class="tg-aos0"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="tg-0lax"></td>
+                <td class="tg-0lax"></td>
+                <td class="tg-0lax"></td>
+                <td class="tg-0lax"></td>
+                <td class="tg-0lax"></td>
+                <td class="tg-0lax"></td>
+                <td class="tg-0lax"></td>
+                <td class="tg-0lax"></td>
+                <td class="tg-0lax"></td>
+                <td class="tg-0lax"></td>
+                <td class="tg-0lax"></td>
+                <td class="tg-0lax"></td>
+                <td class="tg-0lax"></td>
+                <td class="tg-0lax"></td>
+                <td class="tg-0lax"></td>
+                <td class="tg-0lax"></td>
+                <td class="tg-0lax"></td>
+              </tr>
+              <tr>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">CNN-RF</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">s=0.3,r=0.7; FE: 128-&gt;64-&gt;8</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">50.95</td>
+                <td class="tg-3ib7">99.91</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">27.63</td>
+                <td class="tg-3ib7">99.92</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">76.58</td>
+                <td class="tg-3ib7">99.96</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">43.30</td>
+                <td class="tg-3ib7">99.96</td>
+                <td class="tg-3ib7"></td>
+              </tr>
+              <tr>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">s=0.3,r=0.5;&nbsp;&nbsp;FE: 128-&gt;64</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">56.90</td>
+                <td class="tg-3ib7">99.58</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">32.03</td>
+                <td class="tg-3ib7">99.44</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">83.20</td>
+                <td class="tg-3ib7">99.81</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">48.52</td>
+                <td class="tg-3ib7">99.72</td>
+                <td class="tg-3ib7"></td>
+              </tr>
+              <tr>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">s=0.3,r=0.7;&nbsp;&nbsp;FE: 128</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">56.33</td>
+                <td class="tg-3ib7">97.72</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">31.23</td>
+                <td class="tg-3ib7">96.95</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">82.88</td>
+                <td class="tg-3ib7">98.98</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">47.60</td>
+                <td class="tg-3ib7">98.45</td>
+                <td class="tg-3ib7"></td>
+              </tr>
+              <tr>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+              </tr>
+              <tr>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7" rowspan="4">UNET</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">t =0.4</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">47.12</td>
+                <td class="tg-3ib7">37.04</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">26.33</td>
+                <td class="tg-3ib7">23.37</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">71.21</td>
+                <td class="tg-3ib7">57.16</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">41.68</td>
+                <td class="tg-3ib7">37.89</td>
+                <td class="tg-3ib7"></td>
+              </tr>
+              <tr>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">t =median</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">38.48</td>
+                <td class="tg-3ib7">37.77</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">24.49</td>
+                <td class="tg-3ib7">23.53</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">58.82</td>
+                <td class="tg-3ib7">58.18</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">39.34</td>
+                <td class="tg-3ib7">38.10</td>
+                <td class="tg-3ib7"></td>
+              </tr>
+              <tr>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">t =mean +1std</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">51.50</td>
+                <td class="tg-3ib7">56.21</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">25.32</td>
+                <td class="tg-3ib7">22.99</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">79.25</td>
+                <td class="tg-3ib7">78.86</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">40.41</td>
+                <td class="tg-3ib7">37.39</td>
+                <td class="tg-3ib7"></td>
+              </tr>
+              <tr>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">t =mean +2std</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">46.89</td>
+                <td class="tg-3ib7">44.21</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">11.39</td>
+                <td class="tg-3ib7">5.64</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">82.78</td>
+                <td class="tg-3ib7">82.96</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">20.45</td>
+                <td class="tg-3ib7">10.68</td>
+                <td class="tg-3ib7"></td>
+              </tr>
+              <tr>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7"></td>
+              </tr>
+              <tr>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">IM-RF</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">s=0.3,rus=0.5</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">54.73</td>
+                <td class="tg-3ib7">76.51</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">25.95</td>
+                <td class="tg-3ib7">67.95</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">87.26</td>
+                <td class="tg-3ib7">88.66</td>
+                <td class="tg-3ib7"></td>
+                <td class="tg-3ib7">41.21</td>
+                <td class="tg-3ib7">80.92</td>
+                <td class="tg-3ib7"></td>
+              </tr>
+              <tr>
+                <td class="tg-c3ow"></td>
+                <td class="tg-c3ow"></td>
+                <td class="tg-c3ow"></td>
+                <td class="tg-c3ow"></td>
+                <td class="tg-c3ow"></td>
+                <td class="tg-c3ow"></td>
+                <td class="tg-c3ow"></td>
+                <td class="tg-c3ow"></td>
+                <td class="tg-c3ow"></td>
+                <td class="tg-c3ow"></td>
+                <td class="tg-c3ow"></td>
+                <td class="tg-c3ow"></td>
+                <td class="tg-c3ow"></td>
+                <td class="tg-c3ow"></td>
+                <td class="tg-c3ow"></td>
+                <td class="tg-c3ow"></td>
+                <td class="tg-c3ow"></td>
+              </tr>
+            </tbody>
+            </table>
+
+        <p>
+            The parameters for CNN-RF are the SMOTE and RUS ratios and the number of layers in the Feature Extractor (FE). The parameters t for U-NET is the threshold set of it's result. 
+        </p>
+
+                
+        <br>
+        <hr>
+        <br>
+
+        <h1>    
+            2: Prediction for an Unseen Image
+        </h1>            
+        
+        <img class = "list" src="images/predictions.PNG">
+
+    
+
+    </div>
+
+   
     <h3 class="section">
         Attempts to Improve Results
     </h3>
@@ -235,8 +532,13 @@
         <p>
             Since Lineas are connected structures, isolated points marked as Lineas are likely to be outliers. To exploit this fact, DBSCAN was run on the set of 
             points predicted to be on the lineas with n (min samples for a cluster) = 2 and epsilon (distance below which point will be in the same cluster) = 1 
-            and the euclidean metric and dropped all the outliers. Since such points were few, nothing significant came out of this attempt. However,
-            this does increase the precision (and hence the f1 score)
+            and the euclidean metric and dropped all the outliers. This increased the precision (and hence the f1 score) ever so slightly.
+        </p>
+
+        <img class = "list_narrow" src="images/dbscan.PNG">
+
+        <p>
+            In this image, the small blue dots are pixels classified as Lineas which belong to one or the other cluster. The red dots are outliers and are dropped. 
         </p>
         
         <br>
@@ -250,7 +552,24 @@
         <img class = "list_wide" src="images/active.PNG">
 
         <p>
-            In this approach, because of the high cost of labelling the pixels, active learning is used to start the model early even when it has low accuracies. 
+            In the case of a Decision Tree for binary classification, the prediction for a new datapoint is the majority occupancy in the leaf node
+            where the new datapoint lands and the confidence is the ratio of the majority to total points in that node. For a Random Forest,
+            the prediction is the result of the poll among these DTs and the confidence is the average value of the confidence among the DTs.
+        </p>   
+         <p>
+            In this approach, because of the high cost of labelling the pixels, we start using the model early even when it has low accuracies. 
+            We first ask the model to label an unseen image. Along with the label, we also demand a confidence measure for each pixel.
+            We trust and use the model's label of points for which the model has high confidence and we label the rest of the points ourselves (the oracles).
+            Additionally, since our model performs so well in detecting the background, we could trust it's label for a background with a bit lower confidence 
+            than the threshold set for Lineas. Ultimately, we get a mask created by the model and the oracle. With more iterations, the oracle's 
+            work decreases and the model becomes more and more confident. 
+        </p>
+
+        <img class = "list" src="images/red.PNG">
+
+        <p>
+            This is an image unseen by the model. In this image, we only have to label the red section as Lineas and background. The rest has been
+            classified as background by the model. 
         </p>
 
         <br>
@@ -258,36 +577,124 @@
         <br>
     
         <h1>    
-            3: Novel Ideas (?)
+            3: Interesting ideas (?)
         </h1>     
 
-        <p>
-            Anomaly detection to update confidence in each DT in the RF. 
-            Maybe active learning for CNN-RF hybrid is novel. It not not with UNET. 
-            weighted augmentation: Besides these 7 masks, we have additional 4 rougher masks. And among these seven masks, 2 are more accurate than the other 5. 
-            An weighted augmentation can be done to take more samples from the more accurate masks and less samples from the rougher masks.
-        </p>
+        
+
+        <ul>
+            <li class='bullets'>
+                Update the confidence in individual Decision Trees in the Random Forest through anomaly detection using DBSCAN
+            </li>
+
+            <br>
+
+            <li class='bullets'>
+                Active Learning with Random Forest for Image Segmentation is possibly a <u>novel idea</u>. It's possible that low training data (which is when active learning is used),
+                it works better than Active Learning with UNET.
+            </li>
+
+            <br>    
+
+            <li class='bullets'>
+                Giving different weights to different images based on the oracle's confidence on each image. The images with higher confidence could be sampled more. 
+            </li>
+        </ul>
     
 
     </div>
 
+    
     <h3 class="section">
-        Concluding Remarks
+        References and Codes
+    </h3>
+
+    <div>
+
+        <h1>    
+            Papers
+        </h1>
+    
+      <ul>
+          <li>
+            U-Net: Convolutional Networks for Biomedical Image Segmentation by Olaf Ronneberger, Philipp Fischer, Thomas Brox
+          </li>
+          <br>
+          <li>
+            Assessing the Role of Random Forests in Medical Image Segmentation by Dennis Hartmann et al.
+          </li>
+          <br>
+          <li>
+            A Hybrid Cnn-Rf Method for Electron Microscopy Images Segmentation by Guibao Cao et al
+          </li>
+          <br>
+          <li>
+            Active Learning with Bayesian UNet for Efficient Semantic Image Segmentation by Isah Charles Saidu  et al
+          </li>
+      </ul>
+    
+      <br>
+
+
+      <h1>    
+        Codes
+    </h1>
+
+  <ul>
+      <li>
+        Model 1 - Image Filters passed to RF:  <a href="https://colab.research.google.com/drive/1i3YCgVVbmwwD6826oJgP2oeMGP6A4Is6?usp=sharing"> <u>colab notebook</u></a>
+      </li>
+      <br>
+      <li>
+        Model 2 - Feature extractor of CNN passed to RF:  <a href="https://colab.research.google.com/drive/1o06DdUUgP_dUE7z26Ff1HxUvv_BXlp0U?usp=sharing"> <u>colab notebook</u></a>
+      </li>
+      <br>
+      <li>
+        Model 3 - UNET:  <a href="https://colab.research.google.com/drive/1iiLNaQkshLfVD3TFQ1zcFDeXjVyRZFRN?usp=sharing"> <u>colab notebook</u></a>
+      </li>
+      <br>
+  </ul>
+    </div>
+
+
+    <h3 class="section">
+        Discussions
     </h3>
 
 
     <div>
-
+        <h1>    
+            Conclusion
+        </h1>
+    
+        <p>
+            In this project, we hoped to find the salts in Europa's Lineas. As a first step, we decided to make a Linea segmentaion model. 
+            We made different models which work on three different principles, however because of shortage of training data,
+            our models are currently struggling. There is no easy fix for it as far as we know and one has to 
+            expend time and effort in creating the masks. Augmenting the images helps a little and Active Learning could easen the process significantly. 
+            Our current aim is to use Active Learning and see if the IoU improves. If we see that active learning improves the scores,
+            that would be proof of concept for our project. Some interesting ideas like using anomaly detection in image segmentaion to update the weights (teach)
+            of the model and using weighted augmentation have been proposed but due to time constraints, could not be executed. Yet. Various experiments have 
+            been performed on the models like transfer-learning, thresholding using BGD, dimension reduction etc. Although we only have seven masks,
+            since two of our models are based on Random Forest, running GridSearchCV to optimise the hyperparameters is not possible, atleast with 
+            the machines we have access to. To improve the models further, we have handled the imbalance in our dataset and tried to find the anomalies
+            in the predictions. Assuming Active Learning improves the results significantly, we would like to finish this part of the project 
+            by choosing the model with highest validation accuracies. Then we would move on to the second goal and hopefully,
+            we could analyse the minerals in the Lineas. 
+        </p>
+    
+        <br>
 
         <h1>    
             The Bigger Goal
         </h1>
     
         <p>
-            People have guessed that the red colour of the Lineaments is due to magnesium sulphate or sulphuric acid. If that is the case, the spectroscopy data
-            restricted to just the Lineas should match with spectrum of the these compounds. But why does it matter? The chemical composition of the Lineas
-            will give us massive hints about the chemical composition of the oceans underneath. The better understanding of the chemical composition of Europa is 
-            very desirable since that will give us hints about the lifeforms (crossed-fingers) and their biological processes.
+            Once we have the Linea recognition model ready, we could do a spectral analysis of the Lineas. 
+            As a first step, we would like to find the dominant component in the spectra which would likely be magnesium sulphate or sulphuric acid.
+            But, the final step would be to unmix the spectra and look for prebiotic compounds and chemical biosignatures in the Lineas. 
+            Oh how grand that would be!
+
         </p>
     
         <br>

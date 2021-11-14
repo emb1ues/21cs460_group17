@@ -70,9 +70,33 @@ li {
     font-family: 'Courier New', Courier, monospace;
 }
 
+.bullets {
+    color: whitesmoke;
+    transform: none;
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: justify;
+
+}
+
 /* ul {
     text-align: center;
 } */
+
+.link_left {
+    background-color: white;
+    color: black;
+    display: inline-block;
+    /* margin-left: 50%;
+    transform: translateX(-50%); */
+    font-size: 2em;
+    text-align: center;
+    margin: 6% 3% 2% 37%;
+    padding: 1%;
+    font-family: 'Courier New', Courier, monospace;
+}
 
 .link {
     background-color: white;
@@ -82,10 +106,34 @@ li {
     transform: translateX(-50%); */
     font-size: 2em;
     text-align: center;
-    margin: 1% 8% 0 8%;
+    margin: 2% 8% 2% 8%;
     padding: 1%;
     font-family: 'Courier New', Courier, monospace;
 }
+
+.link_right {
+    background-color: white;
+    color: black;
+    display: inline-block;
+    /* margin-left: 50%;
+    transform: translateX(-50%); */
+    font-size: 2em;
+    text-align: center;
+    margin: 6% 30% 2% 3%;
+    padding: 1%;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.rotateimg180 {
+    margin-top: 8%;
+    margin-bottom: 8%;
+    width: 20%;
+    -webkit-transform:rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
 
 .quote {
     text-align: center;
@@ -126,3 +174,16 @@ div {
     padding: 1%;
     font-family: 'Courier New', Courier, monospace; 
 }
+
+.tg  {border-collapse:collapse;border-color:#9ABAD9;border-spacing:0;  margin: 0 0 0 17%;}
+.tg td{background-color:#EBF5FF;border-color:#9ABAD9;border-style:solid;border-width:0px;color:#444;
+  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{background-color:#409cff;border-color:#9ABAD9;border-style:solid;border-width:0px;color:#fff;
+  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-3ib7{border-color:inherit;font-family:"Courier New", Courier, monospace !important;;text-align:center;vertical-align:top}
+.tg .tg-3sk4{background-color:#409cff;border-color:inherit;font-family:"Courier New", Courier, monospace !important;;
+  text-align:center;vertical-align:top}
+.tg .tg-aos0{background-color:#409cff;border-color:inherit;color:#ffffff;font-family:"Courier New", Courier, monospace !important;;
+  text-align:center;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
